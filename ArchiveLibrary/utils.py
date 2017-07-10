@@ -3,11 +3,8 @@ import zipfile
 import tarfile
 
 """ Originally from
-
  http://code.activestate.com/recipes/252508/
-
  heavily refactored since
-
 """
 
 
@@ -18,7 +15,7 @@ class Archive(object):
     def _makedirs(self, directories, basedir):
         """ Create any directories that don't currently exist """
         for dir in directories:
-            curdir = os.path.join(basedir, dir)
+            curdir = basedir + '/' + dir
             if not os.path.exists(curdir):
                 os.makedirs(curdir)
 
@@ -37,7 +34,7 @@ class Unzip(Archive):
         # extract files to directory structure
         for i, name in enumerate(zf.namelist()):
             if not name.endswith('/'):
-                outfile = open(os.path.join(dest, name), 'wb')
+                outfile = open(dest+'/'+name, 'wb')
                 outfile.write(zf.read(name))
                 outfile.flush()
                 outfile.close()
